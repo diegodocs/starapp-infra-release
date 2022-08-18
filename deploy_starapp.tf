@@ -4,6 +4,11 @@ module "deploy_starapp_001" {
 
   #VM        
   business_product_name = "starapp"
+  owner      = "dev@test.io"
+  costcenter = "123456-001"
+  monitoring = true
+  env        = "dev"
+  suffix     = "001"
 
   #NETWORK
   vnet_resource_group_name = "dev-governance-rg-001"
@@ -15,12 +20,5 @@ module "deploy_starapp_001" {
   vm_publisher = "MicrosoftWindowsServer"
   vm_offer     = "WindowsServer"
   vm_sku       = "2022-Datacenter"
-  vm_version   = "latest"
-
-  #GOVERNANCE
-  owner      = "devteam@test.io"
-  costcenter = "123456-001"
-  monitoring = true
-  env        = "dev"
-  suffix     = "001"
+  vm_version   = "latest"  
 }
