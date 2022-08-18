@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
  
 jobs:
-  job-release-package:
+  job-package:
     name: 'Package Infra'
     runs-on: ubuntu-latest    
  
@@ -35,7 +35,7 @@ jobs:
 
 
   job-release-dev:
-    needs: job-release-package
+    needs: job-package
     name: 'Release DEV'
     env:
       ARM_CLIENT_ID: ${{ secrets.AZURE_AD_CLIENT_ID }}
@@ -43,12 +43,8 @@ jobs:
       ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
       ARM_TENANT_ID: ${{ secrets.AZURE_AD_TENANT_ID }}
     runs-on: ubuntu-latest
-    environment: dev
- 
-    defaults:
-      run:
-        shell: bash
- 
+    environment: dev 
+   
     steps:
 
     - uses: actions/download-artifact@v3
@@ -81,3 +77,60 @@ jobs:
         tf_actions_version: 1.2.7
         tf_actions_subcommand: 'apply'
         tf_actions_working_dir: "./terraform"
+
+  job-destroy-dev:
+    needs: wait
+    name: 'Release DEV'
+    env:
+      ARM_CLIENT_ID: ${{ secrets.AZURE_AD_CLIENT_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.AZURE_AD_CLIENT_SECRET }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      ARM_TENANT_ID: ${{ secrets.AZURE_AD_TENANT_ID }}
+    runs-on: ubuntu-latest
+    environment: dev 
+   
+    steps:
+
+    - uses: actions/download-artifact@v3
+      with:       
+        path: ./
+        name: terraform-azure-infra-starapp-1.0.0.0
+
+    - name: Display structure of downloaded files
+      run: tree
+      working-directory: ./
+
+    - name: 'Terraform Init'
+      uses: hashicorp/terraform-github-actions@master
+      with:
+        tf_actions_version: 1.2.7
+        tf_actions_subcommand: 'init'
+        tf_actions_working_dir: "./terraform"
+    
+    - name: Terraform Destroy
+      if: github.ref == 'refs/heads/main'
+      uses: hashicorp/terraform-github-actions@master
+      with:
+        tf_actions_version: 1.2.7
+        tf_actions_subcommand: 'destroy'
+        tf_actions_working_dir: "./terraform"
+
+  job-release-qa:
+    needs: wait
+    name: 'Release QA'   
+    runs-on: ubuntu-latest
+    environment: qa
+    steps:
+    - name: Release PRD
+      run: echo Release QA
+      working-directory: ./
+
+  job-release-prd:
+    needs: wait
+    name: 'Release PRD'   
+    runs-on: ubuntu-latest
+    environment: prd 
+    steps:
+    - name: Release PRD
+      run: echo Release PRD
+      working-directory: ./
