@@ -9,29 +9,18 @@ on:
  
 jobs:
   job-release-package:
-    name: 'Package Architecture'
-    env:
-      ARM_CLIENT_ID: ${{ secrets.AZURE_AD_CLIENT_ID }}
-      ARM_CLIENT_SECRET: ${{ secrets.AZURE_AD_CLIENT_SECRET }}
-      ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-      ARM_TENANT_ID: ${{ secrets.AZURE_AD_TENANT_ID }}
-    runs-on: ubuntu-latest
-    environment: build
- 
-    defaults:
-      run:
-        shell: bash
+    name: 'Package Infra'
+    runs-on: ubuntu-latest    
  
     steps:
     - uses: actions/checkout@v2
     
-    - name: Download multiple workflow artifacts  
-      #uses: marcofaggian/action-download-multiple-artifacts@v3.0.7
+    - name: Download multiple workflow artifacts        
       uses: dawidd6/action-download-artifact@v2
       with:   
         repo: diegodocs/terraform-module-azure-vm     
         workflow: terraform-module-azure-vm-package.yml     
-        name: terraform-module-azure-vm-1.0.0.4
+        name: terraform-module-azure-vm-1.0.0.5
         path: ./modules/vm 
         github_token: ${{secrets.PRIVATE_REPO_TOKEN}} 
         
@@ -85,10 +74,10 @@ jobs:
         tf_actions_subcommand: 'plan'
         tf_actions_working_dir: "./terraform"  
 
-    # - name: Terraform Apply
-    #   if: github.ref == 'refs/heads/main'
-    #   uses: hashicorp/terraform-github-actions@master
-    #   with:
-    #     tf_actions_version: 1.2.7
-    #     tf_actions_subcommand: 'apply'
-    #     tf_actions_working_dir: "./terraform"
+    - name: Terraform Apply
+      if: github.ref == 'refs/heads/main'
+      uses: hashicorp/terraform-github-actions@master
+      with:
+        tf_actions_version: 1.2.7
+        tf_actions_subcommand: 'apply'
+        tf_actions_working_dir: "./terraform"
