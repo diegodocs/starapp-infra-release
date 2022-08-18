@@ -116,7 +116,7 @@ jobs:
         tf_actions_working_dir: "./terraform"
 
   job-release-qa:
-    needs: job-release-qa
+    needs: job-release-dev
     name: 'Release QA'   
     runs-on: ubuntu-latest
     environment: qa
