@@ -32,7 +32,8 @@ jobs:
         repo: diegodocs/terraform-module-azure-vm     
         workflow: terraform-module-azure-vm-package.yml     
         name: terraform-module-azure-vm-1.0.0.4
-        path: ./modules/vm  
+        path: ./modules/vm 
+        github_token: ${{secrets.PRIVATE_REPO_TOKEN}} 
         
     - name: Display structure of downloaded files
       run: tree
