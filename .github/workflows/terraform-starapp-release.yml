@@ -79,7 +79,7 @@ jobs:
         tf_actions_working_dir: "./terraform"
 
   job-destroy-dev:
-    needs: wait
+    needs: job-release-dev
     name: 'Release DEV'
     env:
       ARM_CLIENT_ID: ${{ secrets.AZURE_AD_CLIENT_ID }}
@@ -116,7 +116,7 @@ jobs:
         tf_actions_working_dir: "./terraform"
 
   job-release-qa:
-    needs: wait
+    needs: job-release-qa
     name: 'Release QA'   
     runs-on: ubuntu-latest
     environment: qa
@@ -126,7 +126,7 @@ jobs:
       working-directory: ./
 
   job-release-prd:
-    needs: wait
+    needs: job-release-qa
     name: 'Release PRD'   
     runs-on: ubuntu-latest
     environment: prd 
