@@ -64,12 +64,12 @@ jobs:
 
     - uses: actions/download-artifact@v3
       with:       
-        path: .
+        path: ./
         name: terraform-azure-infra-starapp-1.0.0.0
 
     - name: Display structure of downloaded files
       run: tree
-      working-directory: .
+      working-directory: ./
 
     - name: 'Terraform Init'
       uses: hashicorp/terraform-github-actions@master
