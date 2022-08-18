@@ -64,11 +64,11 @@ jobs:
 
     - uses: actions/download-artifact@v3
       with:       
-        path: ./
+        path: .
 
     - name: Display structure of downloaded files
       run: tree
-      working-directory: ./
+      working-directory: .
 
     - name: 'Terraform Init'
       uses: hashicorp/terraform-github-actions@master
@@ -91,38 +91,3 @@ jobs:
     #     tf_actions_version: 1.2.7
     #     tf_actions_subcommand: 'apply'
     #     tf_actions_working_dir: "./terraform"
-
-  # job-destroy-dev:
-  #   needs: job-release-dev
-  #   name: 'Destroy DEV'
-  #   env:
-  #     ARM_CLIENT_ID: ${{ secrets.AZURE_AD_CLIENT_ID }}
-  #     ARM_CLIENT_SECRET: ${{ secrets.AZURE_AD_CLIENT_SECRET }}
-  #     ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-  #     ARM_TENANT_ID: ${{ secrets.AZURE_AD_TENANT_ID }}
-  #   runs-on: ubuntu-latest
-  #   environment: dev
- 
-  #   defaults:
-  #     run:
-  #       shell: bash
- 
-  #   steps:
-
-  #   - uses: actions/download-artifact@v3
-  #     with:       
-  #       path: ./
-
-  #   - name: 'Terraform Init'
-  #     uses: hashicorp/terraform-github-actions@master
-  #     with:
-  #       tf_actions_version: 1.2.7
-  #       tf_actions_subcommand: 'init'
-  #       tf_actions_working_dir: "./terraform"
-         
-  #   # - name: 'Terraform Destroy'
-  #   #   uses: hashicorp/terraform-github-actions@master
-  #   #   with:
-  #   #     tf_actions_version: 1.2.7
-  #   #     tf_actions_subcommand: 'destroy'
-  #   #     tf_actions_working_dir: "./terraform"  
