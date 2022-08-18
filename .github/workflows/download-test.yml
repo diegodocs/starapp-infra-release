@@ -11,7 +11,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.PRIVATE_REPO_TOKEN }}
 
       - name: Fetch asset
-        run: gh release download --repo diegodocs/terraform-module-azure-vm 
+        run: gh release download --repo diegodocs/terraform-module-azure-vm --pattern 'terraform-module-azure-vm*' 
         env:
           GITHUB_TOKEN: ${{ secrets.PRIVATE_REPO_TOKEN }}
 
