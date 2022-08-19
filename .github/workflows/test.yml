@@ -22,11 +22,18 @@ jobs:
     name: 'Job three'
     runs-on: ubuntu-latest 
     steps:
-    - name: Manual Workflow Approval
-      uses: trstringer/manual-approval@v1.6.0
-      with:        
-        approvers: diegodocs        
-        secret:  ${{secrets.PRIVATE_REPO_TOKEN}} 
+    - name: Generate token
+      id: generate_token
+      uses: tibdex/github-app-token@v1
+      with:
+        app_id: ${{ secrets.APP_ID }}
+        private_key: ${{ secrets.APP_PRIVATE_KEY }}
+    - name: Wait for approval
+      uses: trstringer/manual-approval@v1
+      with:
+        secret: ${{ steps.generate_token.outputs.token }}
+        approvers: myteam
+        minimum-approvals: 1
     - run: echo 'Hello 3'
         
 
