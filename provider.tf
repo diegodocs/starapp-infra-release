@@ -10,7 +10,7 @@ terraform {
     resource_group_name  = "dev-governance-rg-001"
     storage_account_name = "sadevtfstate002"
     container_name       = "tfstate"
-    key                  = "dev-starapp-001.tfstate"
+    key                  = "dev-5starsApp-001.tfstate"
   }
 }
 

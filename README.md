@@ -1,18 +1,18 @@
 [![StarApp-Infra-Release](https://github.com/diegodocs/starapp-infra-release/actions/workflows/terraform-starapp-release.yml/badge.svg)](https://github.com/diegodocs/starapp-infra-release/actions/workflows/terraform-starapp-release.yml)
 
-# Starapp-Infra-Release
+# 5 StarsApp-Infra-Release
 
-This repository you can find files regarding infrastructure creation for Star Application (StarApp).
+This repository you can find files regarding infrastructure creation for 5 Stars Application (5starsApp).
 
 ## Usage example
 
 ```hcl
-module "deploy_starapp" {
+module "vm_001" {
     
     source = "./modules/vm"
     
     #VM        
-    business_product_name = "starapp"
+    business_product_name = "5starsApp"
     owner      = "dev@test.io"
     costcenter = "123456-001"
     monitoring = true

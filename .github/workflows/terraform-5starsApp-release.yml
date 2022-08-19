@@ -1,4 +1,4 @@
-name: 'StarApp-Infra-Release'
+name: '5starsApp-Infra-Release'
  
 on:
   pull_request:
