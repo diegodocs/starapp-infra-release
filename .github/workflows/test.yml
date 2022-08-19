@@ -24,10 +24,9 @@ jobs:
     steps:
     - name: Manual Workflow Approval
       uses: trstringer/manual-approval@v1.6.0
-      with:
-        # Required approvers
+      with:        
         approvers: diegodocs        
-        
+        secret:  ${{secrets.PRIVATE_REPO_TOKEN}} 
     - run: echo 'Hello 3'
         
 
