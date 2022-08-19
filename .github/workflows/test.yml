@@ -1,0 +1,35 @@
+name: 'test'
+
+on:
+  workflow_dispatch:
+
+
+jobs:
+  job-1:
+    name: 'Job One'
+    runs-on: ubuntu-latest   
+  
+    steps:
+    - run: echo 'Hello 1'
+  job-2:
+    name: 'Job Two'
+    runs-on: ubuntu-latest   
+  
+    steps:
+    - run: echo 'Hello 2'
+   
+  job-3:
+    name: 'Job three'
+    runs-on: ubuntu-latest 
+    steps:
+    - name: Create Manual Approval Issue
+      uses: toppulous/create-manual-approval-issue@v1
+      with:
+        # The label to attach to the issue - should be unique per stage, and should not be used outside of CI/CD
+        label: Approval
+        title: '[Github Actions] Manual Approval Required'
+        body: 'Closing this issue will approve all changes listed in comments to the next stage'
+        
+    - run: echo 'Hello 3'
+        
+
