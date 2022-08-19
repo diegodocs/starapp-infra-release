@@ -1,9 +1,9 @@
-module "deploy_starapp_001" {
+module "vm_001" {
 
   source = "./modules/vm"
 
   #VM        
-  business_product_name = "starapp"
+  business_product_name = "5starsApp"
   owner                 = "dev@test.io"
   costcenter            = "123456-001"
   monitoring            = true
