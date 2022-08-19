@@ -1,4 +1,4 @@
-name: '5starsApp-Infra-Release'
+name: '5-StarsApp-Infra-Release'
  
 on:
   pull_request:
