@@ -22,13 +22,11 @@ jobs:
     name: 'Job three'
     runs-on: ubuntu-latest 
     steps:
-    - name: Create Manual Approval Issue
-      uses: toppulous/create-manual-approval-issue@v1
+    - name: Manual Workflow Approval
+      uses: trstringer/manual-approval@v1.6.0
       with:
-        # The label to attach to the issue - should be unique per stage, and should not be used outside of CI/CD
-        label: Approval
-        title: '[Github Actions] Manual Approval Required'
-        body: 'Closing this issue will approve all changes listed in comments to the next stage'
+        # Required approvers
+        approvers: diegodocs        
         
     - run: echo 'Hello 3'
         
