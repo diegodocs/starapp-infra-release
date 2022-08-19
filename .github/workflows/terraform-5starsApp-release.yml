@@ -1,4 +1,4 @@
-name: '5-StarsApp-Infra-Release'
+name: '5starsApp-Infra-Release'
  
 on:
   pull_request:
@@ -87,7 +87,7 @@ jobs:
       ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
       ARM_TENANT_ID: ${{ secrets.AZURE_AD_TENANT_ID }}
     runs-on: ubuntu-latest
-    environment: dev 
+    environment: dev-destroy 
    
     steps:
 
